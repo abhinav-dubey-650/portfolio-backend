@@ -33,10 +33,14 @@ model Experience {
   id          Int      @id @default(autoincrement())
   companyName String   @map("company_name")
   role        String
-  startDate   DateTime @map("start_date")
-  endDate     DateTime @map("end_date")
+  logoUrl     String   @map("logo_url")      // New: company logo
+  startDate   DateTime @map("start_date")    // Keep for sorting/filtering
+  endDate     DateTime @map("end_date")      // Keep for sorting/filtering
+  dateRange   String   @map("date_range")    // New: e.g., "Jan 2025 – Present"
   description String
+  details     String                         // New: for hover tooltip
 }
+
 
 model Testimonial {
   id        Int    @id @default(autoincrement())
