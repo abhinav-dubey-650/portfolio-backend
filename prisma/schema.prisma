@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model About {
+  id          Int    @id @default(autoincrement())
+  name        String
+  tagline     String
+  description String
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  githubUrl   String   @map("github_url")
+  liveUrl     String   @map("live_url")
+  techStack   String[] @map("tech_stack")
+}
+
+model Experience {
+  id          Int      @id @default(autoincrement())
+  companyName String   @map("company_name")
+  role        String
+  startDate   DateTime @map("start_date")
+  endDate     DateTime @map("end_date")
+  description String
+}
+
+model Testimonial {
+  id        Int    @id @default(autoincrement())
+  name      String
+  quote     String
+  avatarUrl String @map("avatar_url")
+}
+
+model TechStack {
+  id    Int      @id @default(autoincrement())
+  type  String
+  tools String[]
+}
+
+model ContactLink {
+  id           Int    @id @default(autoincrement())
+  email        String
+  phone        String
+  linkedin     String
+  github       String
+  portfolioUrl String @map("portfolio_url")
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+model BlogPost {
+  id         Int      @id @default(autoincrement())
+  title      String
+  slug       String   @unique
+  content    String
+  coverImage String   @map("cover_image")
+  createdAt  DateTime @default(now()) @map("created_at")
+}
+
+model Education {
+  id          Int    @id @default(autoincrement())
+  institution String
+  degree      String
+  startYear   Int
+  endYear     Int
+  description String
+}
+
+model Certification {
+  id            Int    @id @default(autoincrement())
+  title         String
+  issuedBy      String
+  issueDate     DateTime
+  credentialUrl String
+}
